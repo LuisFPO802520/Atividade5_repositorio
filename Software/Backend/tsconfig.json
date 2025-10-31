@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                               
+    "module": "commonjs",                          
+    "esModuleInterop": true,                       
+    
+    // Configuração JSX (para React)
+    "jsx": "react",                            
+    
+    // Diretórios
+    "rootDir": "./",                            
+    "outDir": "./dist",                            
+    
+    // Checagem de Tipos
+    "strict": true,                                
+    "skipLibCheck": true,                          
+    "forceConsistentCasingInFileNames": true,      
+    
+    // Outras Configurações Úteis
+    "sourceMap": true,                             
+    "declaration": false,                          
+    "declarationMap": false,                       
+    
+    "moduleResolution": "node",
+    "resolveJsonModule": true, 
+    "skipDefaultLibCheck": true
+  },
+  
+  "include": [
+  "src/**/*",   // Inclui todos os arquivos TypeScript dentro da pasta src
+  "prisma/**/*" // Inclui a pasta prisma para usar os arquivos de configuração, como schema.prisma
+  ],
+  "exclude": [
+    "node_modules",  // Exclui a pasta node_modules da compilação
+    "dist"           // Exclui a pasta dist da compilação
+  ]
+  
+}
