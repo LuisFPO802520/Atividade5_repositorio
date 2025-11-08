@@ -1,12 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -14,26 +7,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  admin
+  cliente
+}
+
+enum Status {
+  pendente
+  preparando
+  pronto
+  entregue
+}
+
 model User {
-  id       Int     @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   name     String
-  email    String  @unique
+  email    String    @unique
   password String
-  role     String  // "admin" ou "cliente"
-  orders   Produto[]
+  role     Role      @default(cliente)
+  pedidos  Produto[]
 }
 
 model Produto {
   id        Int      @id @default(autoincrement())
   nome      String
   quantity  Int
-  status    String   // "pendente", "preparando", "pronto", "entregue"
+  status    Status   @default(pendente)
   createdAt DateTime @default(now())
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
-  valor     Float
-  imagem    String
+  valor     Decimal  @db.Decimal(10, 2)
+  imagem    String?
 }
-
-//senha postgresql:l@rBF3lipe13. IH@V3THEP0WER
-
