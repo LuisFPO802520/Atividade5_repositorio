@@ -1,10 +1,16 @@
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('admin', 'cliente');
+
+-- CreateEnum
+CREATE TYPE "Status" AS ENUM ('pendente', 'preparando', 'pronto', 'entregue');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "role" TEXT NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'cliente',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -14,11 +20,11 @@ CREATE TABLE "Produto" (
     "id" SERIAL NOT NULL,
     "nome" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
-    "status" TEXT NOT NULL,
+    "status" "Status" NOT NULL DEFAULT 'pendente',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" INTEGER NOT NULL,
-    "valor" DOUBLE PRECISION NOT NULL,
-    "imagem" TEXT NOT NULL,
+    "valor" DECIMAL(10,2) NOT NULL,
+    "imagem" TEXT,
 
     CONSTRAINT "Produto_pkey" PRIMARY KEY ("id")
 );
