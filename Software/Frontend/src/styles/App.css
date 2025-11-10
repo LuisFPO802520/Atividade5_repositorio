@@ -1,0 +1,155 @@
+/* ======================================== */
+/*              TEMA GLOBAL                 */
+/* ======================================== */
+
+:root {
+  --bg: #0f0f0f;                  /* fundo principal do site */
+  --surface: #161616;             /* caixas / navbar */
+  --text: #eeeeee;                /* texto padrão */
+  --text-muted: #b6b6b6;          /* texto secundário */
+  --orange: #ff7b29;              /* laranja principal */
+  --orange-dark: #cc5f1f;         /* laranja hover */
+  --border: #2a2a2a;              /* linhas / divisores */
+  --shadow: 0 4px 20px rgba(0,0,0,0.35);
+  --radius: 12px;
+  --transition: 0.25s ease;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ======================================== */
+/*                 NAVBAR                   */
+/* ======================================== */
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 14px 26px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 999;
+}
+
+/* Logo + Marca */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.logo {
+  margin-top: -9px;
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255,123,41,0.35)); /* glow laranja leve */
+}
+
+
+
+.brand-name {
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+/* Hover da marca segue o mesmo do link */
+.brand:hover .brand-name {
+  color: var(--orange);
+}
+
+/* Links da navbar */
+.navbar a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px; /* pill */
+  transition: var(--transition);
+}
+
+/* Hover */
+.navbar a:hover {
+  background: rgba(255,255,255,0.04);
+  color: var(--orange);
+}
+
+/* ======================================== */
+/*           BOTÃO SAIR (logout)            */
+/* ======================================== */
+
+.navbar button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 14px;
+  border-radius: 999px; /* pill */
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.navbar button:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+/* ======================================== */
+/*        ESPAÇAMENTO GLOBAL DA PÁGINA      */
+/* ======================================== */
+
+main, .pagina, .container, .page-wrapper {
+  padding-top: 90px; /* espaço para navbar */
+  width: 100%;
+}
+
+/* ======================================== */
+/*         ESTILOS UTILITÁRIOS OPCIONAIS    */
+/* ======================================== */
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+button, .btn {
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 999px; /* pill */
+  transition: var(--transition);
+}
