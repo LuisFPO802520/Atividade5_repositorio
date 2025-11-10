@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import "../../../styles/OrganizarProdutos.css"; // ajuste o caminho se necessário
+import { criarProduto } from "../../../services/produtosAPI";
+import "../../../styles/Crud.css";
+import { useAuth } from "../../auth/context/AuthContext";
 
 export default function CriarProduto() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ nome: "", valor: "", imagem: "" });
+  const { user } = useAuth();
+  const [form, setForm] = useState({ nome: "", valor: "", imagem: "", quantity: 0, status: "pendente" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((f) => ({ ...f, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.nome || !form.valor || !form.imagem) {
-      alert("Preencha todos os campos.");
+    if (!form.nome || !form.valor) {
+      alert("Preencha todos os campos obrigatórios.");
       return;
     }
 
@@ -24,33 +29,31 @@ export default function CriarProduto() {
       return;
     }
 
+    if (!user?.id) {
+      alert("Você precisa estar logado para criar um produto.");
+      return;
+    }
+
     const produtoFormatado = {
       nome: form.nome,
-      valor: valorNumerico,
-      imagem: form.imagem,
-      quantity: 0,        // campo do Prisma/DB se necessário
-      status: "pendente",
-      // userId será definido no backend com base no usuário logado (admin)
+      valor: valorNumerico, 
+      imagem: form.imagem || null,
+      quantity: Number(form.quantity || 0),
+      status: form.status || "pendente",
+      userId: Number(user.id),
     };
 
     try {
-      const res = await fetch("http://localhost:3000/produtos/criar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(produtoFormatado),
-      });
-
-      if (!res.ok) {
-        const erro = await res.json().catch(() => ({}));
-        throw new Error(erro.erro || "Erro desconhecido");
-      }
-
+      setLoading(true);
+      const res = await criarProduto(produtoFormatado);
       alert("Produto criado com sucesso!");
-      setForm({ nome: "", valor: "", imagem: "" });
+      setForm({ nome: "", valor: "", imagem: "", quantity: 0, status: "pendente" });
       navigate("/produtos");
     } catch (err) {
-      console.error(err);
-      alert(`Erro ao criar produto: ${err.message}`);
+      console.error("Erro ao criar produto:", err);
+      alert(`Erro ao criar produto: ${err.message || JSON.stringify(err)}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,11 +82,31 @@ export default function CriarProduto() {
         <input
           className="input-criar-produto"
           name="imagem"
-          placeholder="URL da imagem"
+          placeholder="URL da imagem (opcional)"
           value={form.imagem}
           onChange={handleChange}
-          required
         />
+        <input
+          className="input-criar-produto"
+          name="quantity"
+          placeholder="Quantidade (inicial)"
+          type="number"
+          value={form.quantity}
+          onChange={handleChange}
+        />
+
+        <select
+          name="status"
+          value={form.status}
+          onChange={handleChange}
+          className="input-criar-produto"
+        >
+          <option value="pendente">pendente</option>
+          <option value="preparando">preparando</option>
+          <option value="pronto">pronto</option>
+          <option value="entregue">entregue</option>
+        </select>
+
         {form.imagem && (
           <div className="preview-container">
             <p>Pré-visualização da imagem:</p>
@@ -97,8 +120,9 @@ export default function CriarProduto() {
             />
           </div>
         )}
-        <button type="submit" className="btn-criar-produto">
-          Criar
+
+        <button type="submit" className="btn-criar-produto" disabled={loading}>
+          {loading ? "Criando..." : "Criar"}
         </button>
       </form>
     </div>

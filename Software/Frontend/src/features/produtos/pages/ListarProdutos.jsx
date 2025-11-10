@@ -1,23 +1,33 @@
-// src/features/produtos/pages/ListarProdutos.jsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { listarProdutos } from "../../../services/produtosAPI";
+import "../../../styles/Crud.css";
 
 export default function ListarProdutos() {
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
     listarProdutos()
-      .then(setProdutos)
-      .catch(() => alert("Erro ao carregar produtos"));
+      .then((res) => {
+        if (!res || res.erro) {
+          throw new Error(res?.erro || "Erro desconhecido");
+        }
+
+        setProdutos(res);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`Erro ao listar produtos: ${err.message}`);
+      });
   }, []);
 
   return (
     <div>
-      <h1>Gerenciar Produtos</h1>
+      <h1 className="titulo-crud">Gerenciar Produtos</h1>
       <div className="botoes-crud">
-        <Link to="/produtos/criar">Criar</Link> |{" "}
-        <Link to="/produtos/atualizar">Atualizar</Link> |{" "}
+        
+        <Link to="/produtos/criar">Criar</Link>
+        <Link to="/produtos/atualizar">Atualizar</Link>
         <Link to="/produtos/remover">Remover</Link>
       </div>
       <ul className="produtos">
