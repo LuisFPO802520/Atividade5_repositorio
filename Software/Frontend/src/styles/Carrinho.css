@@ -1,0 +1,151 @@
+/* ========================================== */
+/*              PAGINA DE CARRINHO            */
+/* ========================================== */
+
+.pagina-carrinho {
+  max-width: 960px;
+  margin: 10px auto;
+  padding: 20px;
+}
+
+.pagina-carrinho h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+/* Lista */
+.pagina-carrinho ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Produto do carrinho */
+.pagina-carrinho li {
+  display: grid;
+  grid-template-columns: 90px 1fr 160px 120px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+
+@media (max-width: 680px) {
+  .pagina-carrinho li {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 10px;
+  }
+}
+
+/* Imagem */
+.img-carrinho {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Botões de quantidade (+/-) */
+.quantidade-btn {
+  padding: 4px 10px;
+  margin-left: 8px;
+  border-radius: 999px;
+  border: none;
+  background: var(--orange);
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: 14px;
+}
+
+.quantidade-btn:hover {
+  background: var(--orange-dark);
+  transform: scale(1.05);
+}
+
+/* Total */
+.pagina-carrinho h3 {
+  margin-top: 24px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.pagina-carrinho p {
+  margin-left: 10px;
+}
+
+/* Ações do carrinho (botões finais) */
+.carrinho-actions {
+  margin-top: 28px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Botão base (limpar e pagar) */
+.btn-padrao {
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+  width: 210px;
+  text-align: center;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(0,0,0,0.35);
+}
+
+.btn-padrao:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* Botão de pagamento */
+.btn-pagamento {
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  box-shadow: 0 0 22px rgba(255, 120, 0, 0.55);
+  border: none !important;
+}
+
+.btn-pagamento:hover {
+  box-shadow: 0 0 32px rgba(255, 120, 0, 0.9);
+}
+
+/* Botão de limpar (neutro elegante) */
+.btn-padrao:not(.btn-pagamento) {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: #ddd;
+}
+
+.btn-padrao:not(.btn-pagamento):hover {
+  background: rgba(255, 80, 80, 0.30);
+  border-color: rgba(255, 80, 80, 0.7);
+  box-shadow: 0 0 22px rgba(255, 80, 80, 0.55);
+}
+
+/* Remove contorno azul/branco nativo */
+button, .btn-pagamento, .btn-padrao {
+  border: none;
+  outline: none;
+}
+
+/* Remove estilo do Link que envolve o botão */
+.link-pagamento, .link-pagamento:focus, .link-pagamento:active {
+  text-decoration: none;
+  border: none;
+  outline: none;
+}

@@ -1,0 +1,163 @@
+/* ======================================== */
+/*          PAINEL ADMIN - CRUD             */
+/* ======================================== */
+
+/* Layout geral do painel */
+.organizar-produtos {
+  margin-top: -30px;
+  width: 260px;
+  min-height: calc(100vh - 80px);
+  padding: 24px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-right: 1px solid var(--border);
+  box-shadow: 0 0 22px rgba(255, 143, 0, 0.12);
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Título lateral */
+.organizar-produtos .text-menu {
+  color: var(--orange);
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+/* Links do menu */
+.organizar-produtos a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: 0.25s;
+}
+
+.organizar-produtos a:hover {
+  background: rgba(255, 143, 0, 0.12);
+  color: var(--orange);
+}
+
+/* Separadores */
+.organizar-produtos hr {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  margin: 8px 0;
+}
+
+/* ======================================== */
+/*        LISTAGEM DE PRODUTOS (ADMIN)      */
+/* ======================================== */
+
+.botoes-crud {
+  margin: 20px 0;
+  margin-bottom: -20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.botoes-crud a {
+  background: rgba(255, 143, 0, 0.1);
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--orange);
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.botoes-crud a:hover {
+  background: var(--orange);
+  color: #000;
+}
+
+/* ======================================== */
+/*         FORMULÁRIOS CRUD (CRIAR/EDITAR)  */
+/* ======================================== */
+
+.criar-produto-container {
+  margin-left: 300px;
+  margin-top: -70px;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 22px rgba(255, 143, 0, 0.15);
+}
+
+.form-criar-produto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-criar-produto {
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.input-criar-produto:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 14px rgba(255, 143, 0, 0.5);
+}
+
+/* Botão de ações CRUD */
+.btn-criar-produto {
+  padding: 12px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 0 18px rgba(255, 143, 0, 0.5);
+}
+
+.btn-criar-produto:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 0 28px rgba(255, 143, 0, 0.8);
+}
+
+/* Preview */
+.preview-imagem {
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  margin-top: 10px;
+}
+
+/* ============================ */
+/*   LAYOUT DO DASHBOARD ADMIN  */
+/* ============================ */
+
+.dashboard-layout {
+  display: flex;
+  margin-top: 90px;
+  min-height: calc(100vh - 90px);
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  padding: 30px;
+}
+
+.titulo-crud {
+  margin-top: -80px;
+  display: flex;
+  justify-content: center;
+}
+
+.text-menu {
+  margin-left: 11px;
+}
