@@ -18,7 +18,15 @@ export function CartProvider({ children }) {
   }
 
   function removerItem(id) {
-    setItems((prev) => prev.filter((p) => p.id !== id));
+    setItems((prev) =>
+      prev
+        .map((p) =>
+          p.id === id
+            ? { ...p, quantidade: p.quantidade - 1 }
+            : p
+        )
+        .filter((p) => p.quantidade > 0)
+    );
   }
 
   function limparCarrinho() {
