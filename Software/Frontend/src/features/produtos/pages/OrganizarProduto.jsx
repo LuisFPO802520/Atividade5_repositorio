@@ -1,8 +1,7 @@
-// src/features/produtos/pages/OrganizarProduto.jsx
 import React, { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { listarProdutos } from "../../../services/produtosAPI";
-//import "../../../styles/OrganizarProdutos.css";
+import "../../../styles/Crud.css";
 
 export default function OrganizarProdutos() {
   const [produtos, setProdutos] = useState([]);
@@ -15,7 +14,7 @@ export default function OrganizarProdutos() {
   }, []);
 
   return (
-    <div style={{ display: "flex", marginTop: "60px" }}>
+    <div className="dashboard-layout">
       <aside className="organizar-produtos">
         <h2 className="text-menu">Organizar Produtos</h2>
 
@@ -71,7 +70,7 @@ export default function OrganizarProdutos() {
         </Link>
       </aside>
 
-      <main style={{ flexGrow: 1, padding: "20px" }}>
+      <main className="dashboard-content">
         <Outlet context={{ produtos, setProdutos }} />
       </main>
     </div>

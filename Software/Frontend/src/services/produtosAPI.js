@@ -1,27 +1,21 @@
-import { apiFetch } from "./api.js";
+import api from "./api.js";
 
 export async function listarProdutos() {
-  return apiFetch("/produtos");
+  return api.get("/produtos");
 }
 
 export async function buscarProduto(id) {
-  return apiFetch(`/produtos/${id}`);
+  return api.get(`/produtos/${id}`);
 }
 
 export async function criarProduto(dados) {
-  return apiFetch("/produtos", {
-    method: "POST",
-    body: JSON.stringify(dados),
-  });
+  return api.post("/produtos", dados);
 }
 
 export async function atualizarProduto(id, dados) {
-  return apiFetch(`/produtos/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(dados),
-  });
+  return api.put(`/produtos/${id}`, dados);
 }
 
 export async function deletarProduto(id) {
-  return apiFetch(`/produtos/${id}`, { method: "DELETE" });
+  return api.delete(`/produtos/${id}`);
 }

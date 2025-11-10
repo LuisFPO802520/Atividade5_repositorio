@@ -1,6 +1,3 @@
-// src/services/api.js
-
-// ✅ Usa import.meta.env em vez de process.env
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 /**

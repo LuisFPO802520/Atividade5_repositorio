@@ -1,46 +1,63 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//import "../../../styles/OrganizarProdutos.css"; // ajuste o caminho se necessário
+import "../../../styles/Crud.css";
+
+import { listarProdutos, atualizarProduto } from "../../../services/produtosAPI";
 
 export default function AtualizarProduto() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ id: "", nome: "", valor: "", imagem: "" });
   const [produtos, setProdutos] = useState([]);
+  const [form, setForm] = useState({
+    id: "",
+    nome: "",
+    valor: "",
+    imagem: "",
+    quantity: "",
+    status: "pendente",
+  });
 
   useEffect(() => {
-    fetch("http://localhost:3000/produtos/ler")
-      .then((res) => {
-        if (!res.ok) throw new Error("Erro ao carregar produtos");
-        return res.json();
-      })
-      .then((data) => setProdutos(data))
-      .catch(console.error);
+    listarProdutos()
+      .then(setProdutos)
+      .catch((err) => {
+        console.error(err);
+        alert("Erro ao carregar produtos.");
+      });
   }, []);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleSelectProduct = (e) => {
+    const id = e.target.value;
+    const produto = produtos.find((p) => p.id == id);
+    if (!produto) return;
+
+    setForm({
+      id,
+      nome: produto.nome,
+      valor: produto.valor,
+      imagem: produto.imagem,
+      quantity: produto.quantity,
+      status: produto.status,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const idNum = Number(form.id);
-    if (!produtos.find((p) => p.id === idNum)) {
-      alert("Produto não encontrado");
-      return;
-    }
+
+    if (!form.id) return alert("Selecione um produto");
 
     try {
-      const res = await fetch(`http://localhost:3000/produtos/atualizar/${form.id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nome: form.nome,
-          valor: parseFloat(form.valor),
-          imagem: form.imagem,
-        }),
+      await atualizarProduto(form.id, {
+        nome: form.nome,
+        valor: parseFloat(form.valor),
+        imagem: form.imagem,
+        quantity: Number(form.quantity),
+        status: form.status,
       });
 
-      if (!res.ok) throw new Error("Erro ao atualizar produto");
       alert("Produto atualizado com sucesso!");
       navigate("/produtos");
     } catch (err) {
@@ -52,15 +69,23 @@ export default function AtualizarProduto() {
   return (
     <div className="criar-produto-container">
       <h2>Atualizar Produto</h2>
+
       <form onSubmit={handleSubmit} className="form-criar-produto">
-        <input
+
+        <select
           className="input-criar-produto"
           name="id"
-          placeholder="ID do Produto"
           value={form.id}
-          onChange={handleChange}
-          required
-        />
+          onChange={handleSelectProduct}
+        >
+          <option value="">Selecione um produto...</option>
+          {produtos.map((p) => (
+            <option key={p.id} value={p.id}>
+              #{p.id} — {p.nome}
+            </option>
+          ))}
+        </select>
+
         <input
           className="input-criar-produto"
           name="nome"
@@ -69,15 +94,18 @@ export default function AtualizarProduto() {
           onChange={handleChange}
           required
         />
+
         <input
           className="input-criar-produto"
           name="valor"
           placeholder="Novo Valor"
           type="number"
+          step="0.01"
           value={form.valor}
           onChange={handleChange}
           required
         />
+
         <input
           className="input-criar-produto"
           name="imagem"
@@ -87,17 +115,32 @@ export default function AtualizarProduto() {
           required
         />
 
+        <input
+          className="input-criar-produto"
+          name="quantity"
+          placeholder="Quantidade em estoque"
+          type="number"
+          value={form.quantity}
+          onChange={handleChange}
+          required
+        />
+
+        <select
+          className="input-criar-produto"
+          name="status"
+          value={form.status}
+          onChange={handleChange}
+        >
+          <option value="pendente">pendente</option>
+          <option value="preparando">preparando</option>
+          <option value="pronto">pronto</option>
+          <option value="entregue">entregue</option>
+        </select>
+
         {form.imagem && (
           <div className="preview-container">
             <p>Pré-visualização da imagem:</p>
-            <img
-              src={form.imagem}
-              alt="Pré-visualização"
-              className="preview-imagem"
-              onError={(e) => {
-                e.target.style.display = "none";
-              }}
-            />
+            <img src={form.imagem} className="preview-imagem" alt="prévia" />
           </div>
         )}
 
