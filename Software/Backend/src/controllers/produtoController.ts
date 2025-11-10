@@ -55,9 +55,9 @@ export const atualizarProduto = async (req: Request, res: Response) => {
       where: { id },
       data: {
         nome,
-        valor: valor?.toString(),
+        valor: valor !== undefined ? valor.toString() : undefined,
         imagem,
-        quantity: quantity ? Number(quantity) : undefined,
+        quantity: quantity !== undefined ? Number(quantity) : undefined,
         status,
       },
     });
