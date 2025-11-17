@@ -48,3 +48,44 @@
   pointer-events: none; 
   filter: drop-shadow(0 0 8px rgba(255,123,41,0.35));
 }
+
+.produto.added {
+  transform: scale(1.05);
+  transition: 0.3s;
+  border: 2px solid #28c76f;
+}
+
+.add-feedback {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: #28c76f;
+  font-weight: bold;
+  animation: fadeInOut 0.7s ease;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.hero .hero-btn:active {
+  animation: clickPulse 0.3s ease-out;
+}
+
+@keyframes clickPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 18px rgba(255, 143, 0, 0.5);
+  }
+  50% {
+    transform: scale(0.94);
+    box-shadow: 0 0 10px rgba(255, 143, 0, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 18px rgba(255, 143, 0, 0.5);
+  }
+}
