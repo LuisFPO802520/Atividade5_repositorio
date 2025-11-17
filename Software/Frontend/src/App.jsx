@@ -27,7 +27,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="brand">
-        <img src="/logo.svg" alt="Big Bar's" className="logo" />
+        <img src="/logo2.png" alt="Big Bar's" className="logo" />
         <span className="brand-name">Big Bar's</span>
       </Link>
 
@@ -51,6 +51,45 @@ function Navbar() {
     </nav>
   );
 }
+
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-content">
+
+        <div className="footer-col">
+          <h3>Big Bar's</h3>
+          <p>As melhores bebidas, lanches e produtos selecionados para você.</p>
+        </div>
+
+        <div className="footer-col">
+          <h4>Links Rápidos</h4>
+          <ul>
+            <li><Link to="/">Início</Link></li>
+            <li><Link to="/carrinho">Carrinho</Link></li>
+            <li><Link to="/login">Login</Link></li>
+          </ul>
+        </div>
+
+        <div className="footer-col">
+          <h4>Contato</h4>
+          <ul>
+            <li>Email: admin@bigbars.com</li>
+            <li>WhatsApp: (67) 4002-8922</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div className="footer-bottom">
+        © {new Date().getFullYear()} Big Bar's — Todos os direitos reservados.
+      </div>
+    </footer>
+  );
+}
+
+
 
 export default function App() {
   return (
@@ -85,7 +124,7 @@ export default function App() {
             </Route>
           </Routes>
         </main>
-
+        <Footer />
       </CartProvider>
     </AuthProvider>
   );
