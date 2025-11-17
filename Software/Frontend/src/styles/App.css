@@ -153,3 +153,69 @@ button, .btn {
   border-radius: 999px; /* pill */
   transition: var(--transition);
 }
+
+/* ======================================== */
+/*                 FOOTER                   */
+/* ======================================== */
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 40px 20px 20px;
+  margin-top: auto; /* ESSENCIAL para grudar no fim da página */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  color: var(--text);
+}
+
+.footer-col h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+
+.footer-col h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.footer-col p,
+.footer-col ul li {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-col a:hover {
+  color: var(--orange);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-muted);
+}

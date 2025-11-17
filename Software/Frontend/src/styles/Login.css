@@ -1,64 +1,78 @@
 .login-container {
-  width: 320px;
-  margin: 80px auto;
-  padding: 30px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 5cap rgba(0,0,0,0.05);
-  font-family: sans-serif;
+  width: 340px;
+  margin: 90px auto;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-family: var(--font);
+  color: var(--text);
 }
 
+/* Título */
 .login-container h1 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 22px;
+  color: var(--text);
+  font-weight: 700;
 }
 
+/* Form */
 .login-container form {
   display: flex;
   flex-direction: column;
+  gap: 14px;
 }
 
+/* Inputs */
 .login-container input {
   padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: var(--radius);
+  background: #0d0d0d;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 15px;
+  transition: var(--transition);
 }
 
 .login-container input:focus {
-  border-color: orange;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 2px rgba(255, 123, 41, 0.3);
   outline: none;
 }
 
+/* Botão */
 .login-container button {
   padding: 12px;
-  background-color: orange;
-  color: white;
-  font-weight: bold;
+  background: var(--orange);
   border: none;
-  border-radius: 5px;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: var(--transition);
 }
 
 .login-container button:hover {
-  background-color: #cc4c00;
+  background: var(--orange-dark);
 }
 
+/* Texto inferior */
 .login-container p {
-  margin-top: 15px;
+  margin-top: 16px;
   text-align: center;
+  color: var(--text-muted);
 }
 
+/* Links */
 .login-container a {
-  color: orange;
-  text-decoration: underline;
-  cursor: pointer;
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
 }
 
-.login-container a:hover{
-  color: #cc4c00;
+.login-container a:hover {
+  color: var(--orange-dark);
 }
