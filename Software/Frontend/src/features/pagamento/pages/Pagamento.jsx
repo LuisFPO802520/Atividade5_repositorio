@@ -4,9 +4,8 @@ import { useCart } from "../../carrinho/contexts/cartContext";
 import "../../../styles/Pagamento.css";
 
 export default function Pagamento() {
-  const { items, total } = useCart();
+  const { items, total, limparCarrinho } = useCart();
   const navigate = useNavigate();
-
 
   const [metodo, setMetodo] = useState("cartao");
   const [cupom, setCupom] = useState("");
@@ -31,6 +30,7 @@ export default function Pagamento() {
     }, 3500);
   };
 
+
   if (items.length === 0) {
     return (
       <div className="pagamento-wrap">
@@ -50,7 +50,10 @@ export default function Pagamento() {
 
             <button
               className="popup-ok-btn"
-              onClick={() => navigate("/")}
+              onClick={() => {
+                limparCarrinho();   // 🔥 limpar só aqui!
+                navigate("/");
+              }}
             >
               OK
             </button>
@@ -107,6 +110,30 @@ export default function Pagamento() {
                   <input type="text" placeholder="000" />
                 </div>
               </div>
+            </>
+          )}
+
+          {metodo === "pix" && (
+            <>
+              <label>Código PIX</label>
+              <input
+                type="text"
+                readOnly
+                value="00020126580014BR.GOV.BCB.PIX0136a1b2c3d4e5f6g7h8i9j0k12345678952040000530398654041.005802BR5913BIG BARS6009SAO PAULO"
+              />
+              <p className="pix-info">Copie o código acima para pagamento.</p>
+            </>
+          )}
+
+          {metodo === "boleto" && (
+            <>
+              <label>Linha Digitável do Boleto</label>
+              <input
+                type="text"
+                readOnly
+                value="34191.79001 01043.510047 91020.150008 9 12340000015000"
+              />
+              <p className="boleto-info">Copie o código acima para pagamento.</p>
             </>
           )}
 
